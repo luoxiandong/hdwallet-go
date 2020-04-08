@@ -29,10 +29,8 @@ func newWICC(key *Key) Wallet {
 func SignUCoinTransferTx(privateKey string, txParam *wiccwallet.UCoinTransferTxParam) (string, error) {
 	hash, err := wiccwallet.SignUCoinTransferTx(privateKey, txParam)
 	if err != nil {
-		fmt.Println("UCoinTransferTx err: ", err)
 		return "", err
 	}
-	//fmt.Println("UCoinTransferTx hash: ", hash)
 
 	return hash, nil
 }
