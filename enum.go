@@ -33,6 +33,9 @@ const (
 	// eth token
 	IOST = ETHToken + 1
 	USDC = ETHToken + 2
+
+	// custom
+	WICC = ZeroQuote + 99999
 )
 
 var coinTypes = map[uint32]uint32{
