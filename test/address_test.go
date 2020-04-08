@@ -3,13 +3,14 @@ package main
 import (
 	"fmt"
 	hdwallet "go-hdwallet"
+	"testing"
 )
 
 var (
 	mnemonic = "range sheriff try enroll deer over ten level bring display stamp recycle"
 )
 
-func main() {
+func TestAddress(t *testing.T) {
 	master, err := hdwallet.NewKey(
 		hdwallet.Mnemonic(mnemonic),
 	)

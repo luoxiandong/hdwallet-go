@@ -3,6 +3,7 @@ module go-hdwallet
 go 1.14
 
 require (
+	github.com/WaykiChain/wicc-wallet-utils-go v2.0.0+incompatible
 	github.com/btcsuite/btcd v0.20.1-beta
 	github.com/btcsuite/btcutil v1.0.1
 	github.com/cpacia/bchutil v0.0.0-20181003130114-b126f6a35b6c
