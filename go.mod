@@ -1,4 +1,4 @@
-module go-hdwalled
+module go-hdwallet
 
 go 1.14
 
