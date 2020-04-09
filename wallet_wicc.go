@@ -51,8 +51,8 @@ func SignUCoinCallContractTx(privateKey string, txParam *wiccwallet.UCoinContrac
 }
 
 /*
- *	部署合约
- *	fee Minimum: 110000000 sawi
+ * 部署合约
+ * ee Minimum: 110000000 sawi
  */
 func SignRegisterContractTx(privateKey string, txParam *wiccwallet.RegisterContractTxParam) (string, error) {
 	hash, err := wiccwallet.SignRegisterContractTx(privateKey, txParam)
