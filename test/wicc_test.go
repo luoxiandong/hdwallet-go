@@ -5,6 +5,7 @@ import (
 	wiccwallet "github.com/WaykiChain/wicc-wallet-utils-go"
 	"github.com/WaykiChain/wicc-wallet-utils-go/commons"
 	hdwallet "go-hdwallet"
+	"io/ioutil"
 	"testing"
 )
 
@@ -44,21 +45,49 @@ func TestSignUCoinTransferTx(t *testing.T) {
  * fee Minimum 1000000 sawi
  * */
 func TestSignUCoinCallContractTx(t *testing.T) {
-	privateKey := "Y6J4aK6Wcs4A3Ex4HXdfjJ6ZsHpNZfjaS4B9w7xqEnmFEYMqQd13"
+	privateKey := "Y54BpYARqtZNNqYT5Zf82B6DWMrof3sk7qPFeMBvrdSzf4FK14jz"
+
 	pubKey, _ := wiccwallet.GetPubKeyFromPrivateKey(privateKey)
 	var txParam wiccwallet.UCoinContractTxParam
 	txParam.FeeSymbol = string(commons.WICC)  //Fee Type (WICC/WUSD)
 	txParam.CoinSymbol = string(commons.WICC) //From Coin Type
 	txParam.CoinAmount = 1000000              // the values send to the contract app
 	txParam.Fees = 1000000                    // fees for mining
-	txParam.ValidHeight = 297449              // valid height Within the height of the latest block
-	txParam.SrcRegId = "0-1"                  // the reg id of the caller
-	txParam.AppId = "0-1"                     // the reg id of the contract app
+	txParam.ValidHeight = 4508191             // valid height Within the height of the latest block
+	txParam.SrcRegId = "4385938-2"            // the reg id of the caller
+	txParam.AppId = "4503374-2"               // the reg id of the contract app
 	txParam.PubKey = pubKey
-	txParam.ContractHex = "f017" // the command of contract, hex format
+	txParam.ContractHex = "4eb744000200" // the command of contract, hex format
 	hash, err := hdwallet.SignUCoinCallContractTx(privateKey, &txParam)
 	if err != nil {
 		t.Error("SignUCoinCallContractTx err: ", err)
 	}
 	println(hash)
+}
+
+/*
+   部署合约
+   fee Minimum :110000000 sawi
+*/
+func TestSignDeployContractTx(t *testing.T) {
+
+	privateKey := "Y54BpYARqtZNNqYT5Zf82B6DWMrof3sk7qPFeMBvrdSzf4FK14jz" //"Y9sx4Y8sBAbWDAqAWytYuUnJige3ZPwKDZp1SCDqqRby1YMgRG9c"
+
+	script, err := ioutil.ReadFile("./data/hello.lua")
+	if err != nil {
+		t.Error("Read contract script file err: ", err)
+	}
+
+	var txParam wiccwallet.RegisterContractTxParam
+	txParam.ValidHeight = 4503364  //20999
+	txParam.SrcRegId = "4385938-2" //"7849-1"
+	txParam.Fees = 110000000
+	txParam.Script = script
+	txParam.Description = "My hello contract!!!"
+	hash, err := hdwallet.SignRegisterContractTx(privateKey, &txParam)
+	if err != nil {
+		t.Error("SignRegisterContractTx err: ", err)
+	}
+	println(hash)
+
 }

@@ -46,22 +46,20 @@ func SignUCoinCallContractTx(privateKey string, txParam *wiccwallet.UCoinContrac
 		fmt.Println("SignUCoinCallContractTx err: ", err)
 		return "", err
 	}
-	//fmt.Println("SignUCoinCallContractTx hash: ", hash)
 
 	return hash, nil
 }
 
 /*
- *	多币种部署合约,推荐使用
+ *	部署合约
  *	fee Minimum: 110000000 sawi
  */
-func SignUCoinDeployContractTx(privateKey string, txParam *wiccwallet.UCoinRegisterContractTxParam) (string, error) {
-	hash, err := wiccwallet.SignUCoinRegisterContractTx(privateKey, txParam)
+func SignRegisterContractTx(privateKey string, txParam *wiccwallet.RegisterContractTxParam) (string, error) {
+	hash, err := wiccwallet.SignRegisterContractTx(privateKey, txParam)
 	if err != nil {
-		fmt.Println("SignUCoinDeployContractTx err: ", err)
+		fmt.Println("SignRegisterContractTx err: ", err)
 		return "", err
 	}
-	//fmt.Println("SignUCoinDeployContractTx hash: ", hash)
 
 	return hash, nil
 }
